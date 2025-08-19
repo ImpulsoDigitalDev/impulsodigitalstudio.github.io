@@ -1,841 +1,618 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Susu Motos | Bera & Empire con carrusel</title>
-  <meta name="description" content="Landing con carrusel a ancho completo, modelos Bera y Empire, método Susu, calculadora, registro demo y espacios para tus fotos."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leonova Studio — Impulso Digital</title>
+  <meta name="description" content="Hub de proyectos de Impulso Digital desarrollado por Leonova Studio. Portafolio, micrositios y contacto." />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui'] },
-          colors: {
-            primary: { 50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'},
-            accent: { 500:'#22d3ee',600:'#06b6d4',700:'#0891b2' },
-            dark: '#0b1020'
-          },
-          boxShadow: {
-            glow: '0 10px 30px rgba(99,102,241,0.25)',
-            soft: '0 8px 20px rgba(0,0,0,0.15)'
-          }
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    .glassy {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
-      border: 1px solid rgba(255,255,255,0.1);
+    :root{
+      --bg:#0b0b0d;
+      --surface:#101114;
+      --muted:#1a1b20;
+      --gold:#d4af37;
+      --gold-2:#f0d78c;
+      --text:#e8e8ea;
+      --sub:#a9abb4;
+      --accent:#7c5cff;
     }
-    .gradient-bg {
-      background: radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,0.25), transparent 60%),
-                  radial-gradient(1000px 400px at 20% 0%, rgba(99,102,241,0.25), transparent 50%),
-                  linear-gradient(180deg, #0b1020 0%, #0b1228 100%);
+    /* Gold sheen */
+    .gold-sheen{
+      background: linear-gradient(110deg, #b89b2e 0%, #d4af37 30%, #f5e6a1 50%, #d4af37 70%, #b89b2e 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: sheen 6s ease-in-out infinite;
     }
-    html { scroll-behavior: smooth; }
+    @keyframes sheen{
+      0%{background-position: 0% 50%}
+      50%{background-position: 100% 50%}
+      100%{background-position: 0% 50%}
+    }
+    /* Card hover glow */
+    .glow:hover{
+      box-shadow: 0 8px 30px rgba(212,175,55,0.15), inset 0 0 0 1px rgba(212,175,55,0.25);
+      transform: translateY(-2px);
+    }
+    /* Focus ring elegant */
+    .focus-ring:focus{
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.35);
+    }
+    /* Smooth transitions */
+    .t{transition: all .25s ease}
+    /* Decorative grid background */
+    .grid-bg{
+      background-image:
+        radial-gradient(transparent 1px, rgba(255,255,255,0.02) 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      background-size: 22px 22px, 100% 100%;
+      background-position: -10px -10px, 0 0;
+    }
+    /* Hide sections via router */
+    .hidden-route{display:none}
+    /* Prevent image/emoji selection highlighting on tap */
+    *{-webkit-tap-highlight-color: transparent}
   </style>
 </head>
-<body class="gradient-bg text-white font-sans selection:bg-accent-600 selection:text-white">
-  <!-- Barra superior -->
-  <header class="fixed top-0 inset-x-0 z-50">
-    <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between glassy rounded-b-2xl">
-      <a href="#" class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center shadow-glow">
-          <svg width="20" height="20" viewBox="0 0 24 24" class="text-white"><path fill="currentColor" d="M14 6h2l2 3h2v2h-2.35A4 4 0 0 1 14 14a4 4 0 0 1-1-.13L10 16h2v2h-3a4 4 0 1 1 .83-7.92L11 8H9V6h5zM7 14a2 2 0 1 0 0 4a2 2 0 0 0 0-4m10-2a2 2 0 1 0 0 4a2 2 0 0 0 0-4"/></svg>
+<body class="bg-[var(--bg)] text-[var(--text)] antialiased selection:bg-yellow-200/20 selection:text-yellow-100">
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 backdrop-blur border-b border-white/5 bg-[color:rgb(11_11_13_/_0.6)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand -->
+        <a href="#/" class="group flex items-center gap-3">
+          <!-- Minimal monograma -->
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full ring-1 ring-white/10 bg-[var(--surface)] t group-hover:ring-[var(--gold)]/40">
+            <span class="font-semibold text-lg gold-sheen" style="font-family:'Playfair Display', serif">L</span>
+          </span>
+          <div class="leading-tight">
+            <div class="text-base font-semibold" style="font-family:'Playfair Display', serif">Leonova Studio</div>
+            <div class="text-[11px] uppercase tracking-[0.18em] text-[var(--sub)]">ImpulsoDigitalStudio.shop</div>
+          </div>
+        </a>
+        <!-- Menu -->
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="#/" class="text-sm text-[var(--sub)] hover:text-[var(--text)] t">Inicio</a>
+          <a href="#/portafolio" class="text-sm text-[var(--sub)] hover:text-[var(--text)] t">Portafolio</a>
+          <a href="#/servicios" class="text-sm text-[var(--sub)] hover:text-[var(--text)] t">Servicios</a>
+          <a href="#/contacto" class="text-sm text-[var(--sub)] hover:text-[var(--text)] t">Contacto</a>
+        </nav>
+        <!-- CTA -->
+        <div class="flex items-center gap-3">
+          <a href="#/contacto" class="inline-flex items-center gap-2 bg-[var(--gold)] text-black font-semibold px-4 py-2 rounded-full t hover:bg-[var(--gold-2)] focus-ring">
+            Empezar proyecto
+            <svg width="16" height="16" viewBox="0 0 24 24" class="t"><path fill="currentColor" d="M5 12h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <button id="btnMenu" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/10 t hover:border-[var(--gold)]/40" aria-label="Abrir menú">
+            <span class="w-5 h-0.5 bg-white/80 block relative">
+              <span class="absolute -top-2 left-0 w-5 h-0.5 bg-white/80"></span>
+              <span class="absolute top-2 left-0 w-5 h-0.5 bg-white/80"></span>
+            </span>
+          </button>
         </div>
-        <span class="font-extrabold tracking-tight text-lg">Susu Motos</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a href="#modelos" class="hover:text-accent-500">Modelos</a>
-        <a href="#calculadora" class="hover:text-accent-500">Calculadora</a>
-        <a href="#registro" class="hover:text-accent-500">Regístrate</a>
-        <a href="#faq" class="hover:text-accent-500">FAQ</a>
-      </nav>
-      <a href="#registro" class="inline-flex items-center gap-2 bg-accent-600 hover:bg-accent-700 text-dark font-bold px-4 py-2 rounded-xl shadow-soft">
-        Comenzar ahora
-        <span class="inline-block w-5 h-5 rounded-full bg-dark text-white grid place-items-center">→</span>
-      </a>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="md:hidden hidden pb-4">
+        <div class="flex flex-col gap-2 p-3 rounded-xl border border-white/10 bg-[var(--surface)]">
+          <a href="#/" class="px-3 py-2 rounded-lg hover:bg-white/5 t">Inicio</a>
+          <a href="#/portafolio" class="px-3 py-2 rounded-lg hover:bg-white/5 t">Portafolio</a>
+          <a href="#/servicios" class="px-3 py-2 rounded-lg hover:bg-white/5 t">Servicios</a>
+          <a href="#/contacto" class="px-3 py-2 rounded-lg hover:bg-white/5 t">Contacto</a>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- Carrusel ancho completo -->
-  <section id="carrusel" class="pt-20 md:pt-24">
-    <div class="relative w-full h-[68vh] md:h-[78vh] overflow-hidden">
-      <!-- Slides -->
-      <div id="slides" class="absolute inset-0 flex transition-transform duration-700 ease-out">
-        <!-- Los slides se llenan dinámicamente -->
-      </div>
-      <!-- Sombras laterales -->
-      <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
+  <!-- ROUTES WRAPPER -->
+  <main id="router" class="relative">
 
-      <!-- Contenido superpuesto -->
-      <div class="absolute inset-x-0 bottom-0 md:bottom-6 px-6">
-        <div class="mx-auto max-w-7xl">
-          <div class="glassy rounded-2xl p-4 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <div class="inline-flex items-center gap-2 text-accent-500 text-xs">
-                <span class="w-2 h-2 rounded-full bg-accent-500"></span> Método Susu • Sin intereses ocultos
+    <!-- HOME -->
+    <section data-route="/" class="grid-bg">
+      <!-- Hero -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-20">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h1 class="text-4xl sm:text-5xl/tight font-semibold" style="font-family:'Playfair Display', serif">
+              Presencia digital con <span class="gold-sheen">elegancia</span> y resultados reales
+            </h1>
+            <p class="mt-4 text-[var(--sub)] max-w-xl">
+              Sitios web minimalistas, profesionales y rápidos. Un hub único para cada cliente bajo tu dominio, con estilo Leonova Studio.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#/portafolio" class="inline-flex items-center gap-2 bg-[var(--gold)] text-black font-semibold px-5 py-3 rounded-xl t hover:bg-[var(--gold-2)] focus-ring">Ver portafolio</a>
+              <a href="#/servicios" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-white/10 hover:border-[var(--gold)]/40 t">Servicios</a>
+            </div>
+            <div class="mt-6 flex items-center gap-4 text-xs text-[var(--sub)]">
+              <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[var(--gold)]"></span>Desarrollado por Leonova Studio</span>
+              <span>Rutas: /TuNegocio</span>
+            </div>
+          </div>
+          <!-- Showcase block -->
+          <div class="relative">
+            <div class="absolute -top-8 -right-6 w-40 h-40 rounded-full blur-3xl bg-[var(--gold)]/10 pointer-events-none"></div>
+            <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-[var(--surface)] to-[var(--muted)]">
+              <div class="p-5 border-b border-white/10 flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                <span class="ml-3 text-xs text-[var(--sub)]">impulsodigitalstudio.shop/NailSpa</span>
               </div>
-              <h1 id="slideTitle" class="text-2xl md:text-4xl font-extrabold leading-snug mt-1">Explora los modelos Bera & Empire</h1>
-              <p class="text-white/80 text-sm md:text-base mt-1">Desliza las fotos o usa las flechas. Si subes tus fotos en “Modelos”, aparecerán aquí.</p>
-            </div>
-            <div class="flex flex-wrap items-center gap-3">
-              <a href="#calculadora" class="bg-primary-600 hover:bg-primary-700 text-white font-semibold px-5 py-3 rounded-xl shadow-glow">Calcular elegibilidad</a>
-              <a href="#modelos" class="glassy px-5 py-3 rounded-xl font-semibold text-white/90">Ver modelos</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Controles -->
-      <button id="prevBtn" class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 glassy w-10 h-10 md:w-12 md:h-12 rounded-full grid place-items-center hover:bg-white/20" aria-label="Anterior">‹</button>
-      <button id="nextBtn" class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 glassy w-10 h-10 md:w-12 md:h-12 rounded-full grid place-items-center hover:bg-white/20" aria-label="Siguiente">›</button>
-
-      <!-- Dots -->
-      <div id="dots" class="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2"></div>
-    </div>
-  </section>
-
-  <!-- Cómo funciona -->
-  <section id="como-funciona" class="py-16 md:py-20">
-    <div class="mx-auto max-w-7xl px-6">
-      <h2 class="text-3xl md:text-4xl font-extrabold mb-8">¿Cómo funciona el Susu?</h2>
-      <div class="grid md:grid-cols-4 gap-6">
-        <div class="glassy rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-xl bg-primary-600 grid place-items-center mb-4 shadow-glow">1</div>
-          <h3 class="font-bold mb-2">Te registras</h3>
-          <p class="text-white/80 text-sm">Elige tu moto Bera o Empire favorita.</p>
-        </div>
-        <div class="glassy rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-xl bg-primary-600 grid place-items-center mb-4 shadow-glow">2</div>
-          <h3 class="font-bold mb-2">El grupo</h3>
-          <p class="text-white/80 text-sm">Ciclo con aportes semanales fijos.</p>
-        </div>
-        <div class="glassy rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-xl bg-primary-600 grid place-items-center mb-4 shadow-glow">3</div>
-          <h3 class="font-bold mb-2">Entrega</h3>
-          <p class="text-white/80 text-sm">Entregas por turno o sorteo.</p>
-        </div>
-        <div class="glassy rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-xl bg-primary-600 grid place-items-center mb-4 shadow-glow">4</div>
-          <h3 class="font-bold mb-2">Ciclo completo</h3>
-          <p class="text-white/80 text-sm">Recibes tu moto y terminas el ciclo.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Modelos con espacios para fotos -->
-  <section id="modelos" class="py-16 md:py-20">
-    <div class="mx-auto max-w-7xl px-6">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-6">
-        <div>
-          <h2 class="text-3xl md:text-4xl font-extrabold">Modelos disponibles</h2>
-          <p class="text-white/80 mt-2">Sube tus fotos para verlas también en el carrusel superior.</p>
-        </div>
-        <div class="flex items-center gap-3">
-          <button data-filter="all" class="filter-btn bg-accent-600 hover:bg-accent-700 text-dark font-semibold px-4 py-2 rounded-xl">Todas</button>
-          <button data-filter="Bera" class="filter-btn glassy px-4 py-2 rounded-xl">Bera</button>
-          <button data-filter="Empire" class="filter-btn glassy px-4 py-2 rounded-xl">Empire</button>
-        </div>
-      </div>
-
-      <div id="cardsWrap" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Bera BR 150 -->
-        <div class="model-card glassy rounded-2xl p-5 flex flex-col" data-brand="Bera" data-model="BR 150" data-price="1650">
-          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 grid place-items-center">
-            <img id="img-BR150" alt="Bera BR 150" class="w-full h-full object-cover hidden"/>
-            <div class="absolute inset-0 flex items-center justify-center text-white/70 text-sm" id="ph-BR150">Espacio para tu foto</div>
-          </div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="flex gap-2">
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="triggerPhoto('BR150')">Agregar foto</button>
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="clearPhoto('BR150')">Quitar</button>
-            </div>
-            <input id="file-BR150" type="file" accept="image/*" class="hidden" onchange="handlePhotoChange(event,'BR150')"/>
-            <div class="text-xs bg-primary-600/50 rounded-full px-2 py-1">150cc</div>
-          </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-xs text-white/70">Bera</div>
-            <h3 class="font-bold">Bera BR 150</h3>
-          </div>
-          <p class="text-white/75 text-sm mt-1">Urbana, eficiente y confiable para la ciudad.</p>
-          <div class="mt-4 flex items-center justify-between">
-            <div class="text-white font-bold">$1,650</div>
-            <div class="text-white/70 text-xs">Desde $24/sem</div>
-          </div>
-          <button class="mt-5 w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 rounded-xl" onclick="prefillModel('Bera','Bera BR 150',1650)">Solicitar por Susu</button>
-        </div>
-
-        <!-- Bera DTX 200 -->
-        <div class="model-card glassy rounded-2xl p-5 flex flex-col" data-brand="Bera" data-model="DTX 200" data-price="2150">
-          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 grid place-items-center">
-            <img id="img-DTX200" alt="Bera DTX 200" class="w-full h-full object-cover hidden"/>
-            <div class="absolute inset-0 flex items-center justify-center text-white/70 text-sm" id="ph-DTX200">Espacio para tu foto</div>
-          </div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="flex gap-2">
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="triggerPhoto('DTX200')">Agregar foto</button>
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="clearPhoto('DTX200')">Quitar</button>
-            </div>
-            <input id="file-DTX200" type="file" accept="image/*" class="hidden" onchange="handlePhotoChange(event,'DTX200')"/>
-            <div class="text-xs bg-primary-600/50 rounded-full px-2 py-1">200cc</div>
-          </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-xs text-white/70">Bera</div>
-            <h3 class="font-bold">Bera DTX 200</h3>
-          </div>
-          <p class="text-white/75 text-sm mt-1">Doble propósito con espíritu aventurero.</p>
-          <div class="mt-4 flex items-center justify-between">
-            <div class="text-white font-bold">$2,150</div>
-            <div class="text-white/70 text-xs">Desde $31/sem</div>
-          </div>
-          <button class="mt-5 w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 rounded-xl" onclick="prefillModel('Bera','Bera DTX 200',2150)">Solicitar por Susu</button>
-        </div>
-
-        <!-- Empire RKS 150 -->
-        <div class="model-card glassy rounded-2xl p-5 flex flex-col" data-brand="Empire" data-model="Keeway RKS 150" data-price="1850">
-          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 grid place-items-center">
-            <img id="img-RKS150" alt="Empire RKS 150" class="w-full h-full object-cover hidden"/>
-            <div class="absolute inset-0 flex items-center justify-center text-white/70 text-sm" id="ph-RKS150">Espacio para tu foto</div>
-          </div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="flex gap-2">
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="triggerPhoto('RKS150')">Agregar foto</button>
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="clearPhoto('RKS150')">Quitar</button>
-            </div>
-            <input id="file-RKS150" type="file" accept="image/*" class="hidden" onchange="handlePhotoChange(event,'RKS150')"/>
-            <div class="text-xs bg-primary-600/50 rounded-full px-2 py-1">150cc</div>
-          </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-xs text-white/70">Empire</div>
-            <h3 class="font-bold">Empire RKS 150</h3>
-          </div>
-          <p class="text-white/75 text-sm mt-1">Potencia y estilo con bajo consumo.</p>
-          <div class="mt-4 flex items-center justify-between">
-            <div class="text-white font-bold">$1,850</div>
-            <div class="text-white/70 text-xs">Desde $27/sem</div>
-          </div>
-          <button class="mt-5 w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 rounded-xl" onclick="prefillModel('Empire','Empire RKS 150',1850)">Solicitar por Susu</button>
-        </div>
-
-        <!-- Empire TX 200 -->
-        <div class="model-card glassy rounded-2xl p-5 flex flex-col" data-brand="Empire" data-model="TX 200" data-price="2350">
-          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 grid place-items-center">
-            <img id="img-TX200" alt="Empire TX 200" class="w-full h-full object-cover hidden"/>
-            <div class="absolute inset-0 flex items-center justify-center text-white/70 text-sm" id="ph-TX200">Espacio para tu foto</div>
-          </div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="flex gap-2">
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="triggerPhoto('TX200')">Agregar foto</button>
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="clearPhoto('TX200')">Quitar</button>
-            </div>
-            <input id="file-TX200" type="file" accept="image/*" class="hidden" onchange="handlePhotoChange(event,'TX200')"/>
-            <div class="text-xs bg-primary-600/50 rounded-full px-2 py-1">200cc</div>
-          </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-xs text-white/70">Empire</div>
-            <h3 class="font-bold">Empire TX 200</h3>
-          </div>
-          <p class="text-white/75 text-sm mt-1">Versatilidad urbana y ruta con carácter.</p>
-          <div class="mt-4 flex items-center justify-between">
-            <div class="text-white font-bold">$2,350</div>
-            <div class="text-white/70 text-xs">Desde $34/sem</div>
-          </div>
-          <button class="mt-5 w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 rounded-xl" onclick="prefillModel('Empire','Empire TX 200',2350)">Solicitar por Susu</button>
-        </div>
-
-        <!-- Bera SBR 250 -->
-        <div class="model-card glassy rounded-2xl p-5 flex flex-col" data-brand="Bera" data-model="SBR 250" data-price="2950">
-          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 grid place-items-center">
-            <img id="img-SBR250" alt="Bera SBR 250" class="w-full h-full object-cover hidden"/>
-            <div class="absolute inset-0 flex items-center justify-center text-white/70 text-sm" id="ph-SBR250">Espacio para tu foto</div>
-          </div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="flex gap-2">
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="triggerPhoto('SBR250')">Agregar foto</button>
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="clearPhoto('SBR250')">Quitar</button>
-            </div>
-            <input id="file-SBR250" type="file" accept="image/*" class="hidden" onchange="handlePhotoChange(event,'SBR250')"/>
-            <div class="text-xs bg-primary-600/50 rounded-full px-2 py-1">250cc</div>
-          </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-xs text-white/70">Bera</div>
-            <h3 class="font-bold">Bera SBR 250</h3>
-          </div>
-          <p class="text-white/75 text-sm mt-1">Más cilindrada, más camino.</p>
-          <div class="mt-4 flex items-center justify-between">
-            <div class="text-white font-bold">$2,950</div>
-            <div class="text-white/70 text-xs">Desde $43/sem</div>
-          </div>
-          <button class="mt-5 w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 rounded-xl" onclick="prefillModel('Bera','Bera SBR 250',2950)">Solicitar por Susu</button>
-        </div>
-
-        <!-- Empire ADV 250 -->
-        <div class="model-card glassy rounded-2xl p-5 flex flex-col" data-brand="Empire" data-model="ADV 250" data-price="3150">
-          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 grid place-items-center">
-            <img id="img-ADV250" alt="Empire ADV 250" class="w-full h-full object-cover hidden"/>
-            <div class="absolute inset-0 flex items-center justify-center text-white/70 text-sm" id="ph-ADV250">Espacio para tu foto</div>
-          </div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="flex gap-2">
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="triggerPhoto('ADV250')">Agregar foto</button>
-              <button class="glassy px-3 py-1 rounded-lg text-xs" onclick="clearPhoto('ADV250')">Quitar</button>
-            </div>
-            <input id="file-ADV250" type="file" accept="image/*" class="hidden" onchange="handlePhotoChange(event,'ADV250')"/>
-            <div class="text-xs bg-primary-600/50 rounded-full px-2 py-1">250cc</div>
-          </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-xs text-white/70">Empire</div>
-            <h3 class="font-bold">Empire ADV 250</h3>
-          </div>
-          <p class="text-white/75 text-sm mt-1">Aventura y comodidad a otro nivel.</p>
-          <div class="mt-4 flex items-center justify-between">
-            <div class="text-white font-bold">$3,150</div>
-            <div class="text-white/70 text-xs">Desde $46/sem</div>
-          </div>
-          <button class="mt-5 w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 rounded-xl" onclick="prefillModel('Empire','Empire ADV 250',3150)">Solicitar por Susu</button>
-        </div>
-      </div>
-
-      <p class="text-white/60 text-xs mt-4">Tip: sube una foto desde tu dispositivo. Se guardará localmente y también aparecerá en el carrusel de la cabecera.</p>
-    </div>
-  </section>
-
-  <!-- Calculadora -->
-  <section id="calculadora" class="py-16 md:py-20">
-    <div class="mx-auto max-w-7xl px-6">
-      <div class="grid lg:grid-cols-2 gap-10 items-start">
-        <div class="glassy rounded-2xl p-6 lg:p-8">
-          <h2 class="text-3xl font-extrabold">Calcula tu elegibilidad</h2>
-          <p class="text-white/80 mt-2 text-sm">Referencia rápida. Los valores pueden variar por modelo y ciclo.</p>
-          <div class="mt-6 grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Ingreso mensual ($)</label>
-              <input id="ingreso" type="number" min="0" placeholder="Ej. 600" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Aporte inicial ($)</label>
-              <input id="inicial" type="number" min="0" placeholder="Ej. 150" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Precio de la moto ($)</label>
-              <input id="precio" type="number" min="500" placeholder="Ej. 2150" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Aporte semanal ($)</label>
-              <input id="semanal" type="number" min="5" placeholder="Ej. 35" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Plazo (meses)</label>
-              <input id="meses" type="number" min="3" max="24" placeholder="Ej. 12" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div class="flex items-end">
-              <button id="calcBtn" class="w-full bg-accent-600 hover:bg-accent-700 text-dark font-bold py-3 rounded-xl">Evaluar</button>
-            </div>
-          </div>
-          <div id="resultado" class="mt-6 hidden">
-            <div id="badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3"></div>
-            <div class="glassy rounded-xl p-4">
-              <div id="mensaje" class="font-semibold"></div>
-              <div id="detalles" class="text-white/80 text-sm mt-3"></div>
-              <div class="mt-4 flex flex-wrap gap-3">
-                <a href="#registro" class="bg-primary-600 hover:bg-primary-700 text-white font-semibold px-4 py-2 rounded-xl">Reservar mi cupo</a>
-                <button onclick="sugerirSemanal()" class="glassy px-4 py-2 rounded-xl">Sugerir aporte semanal</button>
+              <div class="p-6">
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="rounded-xl h-40 bg-[var(--bg)]/60 border border-white/5 flex items-center justify-center">
+                    <span class="text-6xl">💅</span>
+                  </div>
+                  <div class="rounded-xl h-40 bg-[var(--bg)]/60 border border-white/5 flex items-center justify-center">
+                    <span class="text-6xl">🍽️</span>
+                  </div>
+                  <div class="rounded-xl h-40 bg-[var(--bg)]/60 border border-white/5 flex items-center justify-center">
+                    <span class="text-6xl">🏋️</span>
+                  </div>
+                  <div class="rounded-xl h-40 bg-[var(--bg)]/60 border border-white/5 flex items-center justify-center">
+                    <span class="text-6xl">🛍️</span>
+                  </div>
+                </div>
+                <div class="mt-5 text-right">
+                  <a href="#/portafolio" class="text-sm text-[var(--gold)] hover:text-[var(--gold-2)] t">Explorar proyectos →</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="space-y-6">
-          <div class="glassy rounded-2xl p-6">
-            <h3 class="font-bold text-xl">Reglas simples</h3>
-            <ul class="mt-3 space-y-2 text-white/80 text-sm">
-              <li>• Aporte semanal sugerido: hasta 20% de tu ingreso semanal.</li>
-              <li>• Tu aporte debe alcanzar el precio dentro del plazo.</li>
-              <li>• Un buen inicial puede adelantar tu turno.</li>
-            </ul>
+
+        <!-- Quick strip stats -->
+        <div class="mt-16 grid sm:grid-cols-3 gap-4">
+          <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6 text-center">
+            <div class="text-3xl font-semibold gold-sheen" style="font-family:'Playfair Display', serif">+15</div>
+            <div class="text-[var(--sub)] text-sm mt-1">Micrositios lanzados</div>
           </div>
-          <div class="glassy rounded-2xl p-6">
-            <h3 class="font-bold text-xl">¿Qué es Susu?</h3>
-            <p class="text-white/80 mt-2 text-sm">Ahorro en grupo sin intereses. Aportes iguales cada semana y entregas por turno/sorteo hasta completar el ciclo.</p>
+          <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6 text-center">
+            <div class="text-3xl font-semibold gold-sheen" style="font-family:'Playfair Display', serif">100%</div>
+            <div class="text-[var(--sub)] text-sm mt-1">Diseño a medida</div>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6 text-center">
+            <div class="text-3xl font-semibold gold-sheen" style="font-family:'Playfair Display', serif">48h</div>
+            <div class="text-[var(--sub)] text-sm mt-1">Entrega demo inicial</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Registro (Demo) -->
-  <section id="registro" class="py-16 md:py-20">
-    <div class="mx-auto max-w-7xl px-6">
-      <div class="flex items-start flex-col lg:flex-row gap-8">
-        <div class="glassy rounded-2xl p-6 lg:p-8 w-full lg:w-2/3">
+      <!-- Featured CTA -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div class="rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-[var(--muted)] to-[var(--surface)]">
+          <div class="p-8 md:p-10 flex flex-col md:flex-row items-center md:items-end justify-between gap-6">
+            <div>
+              <h2 class="text-2xl md:text-3xl font-semibold" style="font-family:'Playfair Display', serif">Impulsa tu estudio con una vitrina impecable</h2>
+              <p class="text-[var(--sub)] mt-2 max-w-2xl">Ordeno tus proyectos bajo tu dominio y tu sello. Cada tarjeta abre un micrositio propio con su ruta.</p>
+            </div>
+            <a href="#/contacto" class="inline-flex items-center gap-2 bg-[var(--gold)] text-black font-semibold px-6 py-3 rounded-xl t hover:bg-[var(--gold-2)]">Solicitar propuesta</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTAFOLIO -->
+    <section data-route="/portafolio" class="hidden-route">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-16">
+        <div class="flex items-end justify-between flex-wrap gap-4">
+          <div>
+            <h2 class="text-3xl font-semibold" style="font-family:'Playfair Display', serif">Portafolio</h2>
+            <p class="text-[var(--sub)] mt-1">Explora micrositios alojados en tu dominio.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="relative">
+              <input id="searchInput" type="text" placeholder="Buscar por nombre o categoría..." class="w-72 max-w-[80vw] bg-[var(--surface)] border border-white/10 rounded-xl px-4 py-2 pr-10 t focus-ring placeholder:text-[var(--sub)]/70">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--sub)]">⌕</span>
+            </div>
+            <button id="clearSearch" class="hidden text-sm text-[var(--gold)] hover:text-[var(--gold-2)] t">Limpiar</button>
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <div id="grid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Item template examples -->
+          <article class="project glow t rounded-2xl overflow-hidden border border-white/10 bg-[var(--surface)]" data-name="NailSpa" data-tags="belleza spa uñas">
+            <div class="p-5 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">💅</div>
+                <div>
+                  <h3 class="font-semibold">NailSpa</h3>
+                  <p class="text-[11px] uppercase tracking-widest text-[var(--sub)]">Belleza & Spa</p>
+                </div>
+              </div>
+              <span class="text-[10px] uppercase tracking-[0.2em] text-[var(--gold)]">Leonova Studio</span>
+            </div>
+            <div class="px-5 pb-5">
+              <p class="text-sm text-[var(--sub)]">Citas online, galería y servicios en un micrositio ágil.</p>
+              <div class="mt-4 flex items-center justify-between">
+                <a href="#site/NailSpa" class="inline-flex items-center gap-2 text-sm text-[var(--gold)] hover:text-[var(--gold-2)] t">Ver demo →</a>
+                <span class="text-xs text-[var(--sub)]">/NailSpa</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project glow t rounded-2xl overflow-hidden border border-white/10 bg-[var(--surface)]" data-name="BistroLuna" data-tags="restaurante comida delivery">
+            <div class="p-5 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">🍽️</div>
+                <div>
+                  <h3 class="font-semibold">Bistro Luna</h3>
+                  <p class="text-[11px] uppercase tracking-widest text-[var(--sub)]">Restaurante</p>
+                </div>
+              </div>
+              <span class="text-[10px] uppercase tracking-[0.2em] text-[var(--gold)]">Leonova Studio</span>
+            </div>
+            <div class="px-5 pb-5">
+              <p class="text-sm text-[var(--sub)]">Carta atractiva, horarios y reservas desde el sitio.</p>
+              <div class="mt-4 flex items-center justify-between">
+                <button data-preview="bistro" class="inline-flex items-center gap-2 text-sm text-[var(--gold)] hover:text-[var(--gold-2)] t">Vista rápida</button>
+                <span class="text-xs text-[var(--sub)]">/BistroLuna</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project glow t rounded-2xl overflow-hidden border border-white/10 bg-[var(--surface)]" data-name="FitPulse" data-tags="gimnasio fitness salud">
+            <div class="p-5 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">🏋️</div>
+                <div>
+                  <h3 class="font-semibold">FitPulse</h3>
+                  <p class="text-[11px] uppercase tracking-widest text-[var(--sub)]">Gimnasio</p>
+                </div>
+              </div>
+              <span class="text-[10px] uppercase tracking-[0.2em] text-[var(--gold)]">Leonova Studio</span>
+            </div>
+            <div class="px-5 pb-5">
+              <p class="text-sm text-[var(--sub)]">Planes, horarios y contacto rápido para nuevos miembros.</p>
+              <div class="mt-4 flex items-center justify-between">
+                <button data-preview="fit" class="inline-flex items-center gap-2 text-sm text-[var(--gold)] hover:text-[var(--gold-2)] t">Vista rápida</button>
+                <span class="text-xs text-[var(--sub)]">/FitPulse</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project glow t rounded-2xl overflow-hidden border border-white/10 bg-[var(--surface)]" data-name="BoutiqueNova" data-tags="tienda moda ecommerce">
+            <div class="p-5 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">🛍️</div>
+                <div>
+                  <h3 class="font-semibold">Boutique Nova</h3>
+                  <p class="text-[11px] uppercase tracking-widest text-[var(--sub)]">Moda</p>
+                </div>
+              </div>
+              <span class="text-[10px] uppercase tracking-[0.2em] text-[var(--gold)]">Leonova Studio</span>
+            </div>
+            <div class="px-5 pb-5">
+              <p class="text-sm text-[var(--sub)]">Catálogo visual y destacar colecciones sin complicaciones.</p>
+              <div class="mt-4 flex items-center justify-between">
+                <button data-preview="boutique" class="inline-flex items-center gap-2 text-sm text-[var(--gold)] hover:text-[var(--gold-2)] t">Vista rápida</button>
+                <span class="text-xs text-[var(--sub)]">/BoutiqueNova</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Quick Preview Modal -->
+      <div id="previewModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70"></div>
+        <div class="relative w-full max-w-2xl rounded-2xl overflow-hidden border border-white/10 bg-[var(--surface)]">
+          <div class="flex items-center justify-between p-4 border-b border-white/10">
+            <h4 class="font-semibold">Vista rápida</h4>
+            <button id="closePreview" class="w-9 h-9 rounded-full border border-white/10 hover:border-[var(--gold)]/40 t" aria-label="Cerrar">✕</button>
+          </div>
+          <div class="p-6 text-[var(--sub)]">
+            <div id="previewContent" class="text-sm leading-relaxed">
+              Cargando vista…
+            </div>
+            <div class="mt-6 text-right">
+              <a id="previewGo" href="#" class="inline-flex items-center gap-2 bg-[var(--gold)] text-black font-semibold px-4 py-2 rounded-xl t hover:bg-[var(--gold-2)]">Ir al micrositio →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section data-route="/servicios" class="hidden-route">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-16">
+        <h2 class="text-3xl font-semibold" style="font-family:'Playfair Display', serif">Servicios</h2>
+        <p class="text-[var(--sub)] mt-1">Todo lo necesario para tu presencia online.</p>
+
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6 glow t">
+            <div class="text-3xl">🎯</div>
+            <h3 class="mt-3 font-semibold">Micrositios por ruta</h3>
+            <p class="text-sm text-[var(--sub)] mt-2">Estructura clara: impulsodigitalstudio.shop/TuNegocio con diseño único y coherente.</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6 glow t">
+            <div class="text-3xl">⚡</div>
+            <h3 class="mt-3 font-semibold">Rápidos y elegantes</h3>
+            <p class="text-sm text-[var(--sub)] mt-2">Minimalismo en negro y dorado, performance y tipografía de alto nivel.</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6 glow t">
+            <div class="text-3xl">🧭</div>
+            <h3 class="mt-3 font-semibold">Vitrina y filtros</h3>
+            <p class="text-sm text-[var(--sub)] mt-2">Vitrina con buscador para compartir tu portafolio en un link.</p>
+          </div>
+        </div>
+
+        <div class="mt-10 rounded-2xl border border-white/10 bg-gradient-to-br from-[var(--muted)] to-[var(--surface)] p-6">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <h3 class="font-semibold" style="font-family:'Playfair Display', serif">¿Listo para tu siguiente proyecto?</h3>
+              <p class="text-sm text-[var(--sub)] mt-1">Cuéntame de tu negocio y preparo un demo en 48h.</p>
+            </div>
+            <a href="#/contacto" class="inline-flex items-center gap-2 bg-[var(--gold)] text-black font-semibold px-5 py-3 rounded-xl t hover:bg-[var(--gold-2)]">Hablemos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO (Demo) -->
+    <section data-route="/contacto" class="hidden-route">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-16">
+        <h2 class="text-3xl font-semibold" style="font-family:'Playfair Display', serif">Contacto</h2>
+        <p class="text-[var(--sub)] mt-1">Este formulario es DEMO para fines de muestra. Al enviar verás una confirmación en pantalla.</p>
+
+        <form id="contactForm" class="mt-8 rounded-2xl border border-white/10 bg-[var(--surface)] p-6 space-y-4">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm text-[var(--sub)]">Nombre</label>
+              <input required type="text" class="w-full mt-2 bg-[var(--bg)]/60 border border-white/10 rounded-xl px-4 py-3 focus-ring" placeholder="Tu nombre" />
+            </div>
+            <div>
+              <label class="text-sm text-[var(--sub)]">Email</label>
+              <input required type="email" class="w-full mt-2 bg-[var(--bg)]/60 border border-white/10 rounded-xl px-4 py-3 focus-ring" placeholder="tucorreo@ejemplo.com" />
+            </div>
+          </div>
+          <div>
+            <label class="text-sm text-[var(--sub)]">Tipo de proyecto</label>
+            <select class="w-full mt-2 bg-[var(--bg)]/60 border border-white/10 rounded-xl px-4 py-3 focus-ring">
+              <option>Micrositio (ruta /TuNegocio)</option>
+              <option>One-page profesional</option>
+              <option>Rediseño</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-sm text-[var(--sub)]">Mensaje</label>
+            <textarea rows="5" class="w-full mt-2 bg-[var(--bg)]/60 border border-white/10 rounded-xl px-4 py-3 focus-ring" placeholder="Cuéntame brevemente tu objetivo…"></textarea>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-[var(--sub)]">Al enviar, verás un mensaje de confirmación (demo).</span>
+            <button class="inline-flex items-center gap-2 bg-[var(--gold)] text-black font-semibold px-5 py-3 rounded-xl t hover:bg-[var(--gold-2)]" type="submit">Enviar</button>
+          </div>
+        </form>
+
+        <div id="contactSuccess" class="hidden mt-4 rounded-xl border border-[var(--gold)]/30 bg-[var(--gold)]/10 text-[var(--gold-2)] p-4">
+          Gracias por tu mensaje. Te responderé a la brevedad. (Demo)
+        </div>
+      </div>
+    </section>
+
+    <!-- MICROSITIO: NailSpa -->
+    <section data-route="site/NailSpa" class="hidden-route">
+      <div class="relative">
+        <div class="absolute inset-x-0 -top-24 h-72 bg-gradient-to-b from-[var(--gold)]/10 to-transparent pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
           <div class="flex items-center justify-between gap-4">
-            <h2 class="text-3xl font-extrabold">Regístrate al ciclo Susu</h2>
-            <span class="text-xs bg-yellow-400/20 text-yellow-200 px-3 py-1 rounded-full">Demo: tus datos quedan solo en tu dispositivo</span>
+            <a href="#/portafolio" class="inline-flex items-center gap-2 text-sm text-[var(--sub)] hover:text-[var(--text)] t">← Volver al hub</a>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--gold)]">Desarrollado por Leonova Studio</span>
           </div>
-          <p class="text-white/80 mt-2 text-sm">Te contactaremos para validar disponibilidad y próximas fechas.</p>
-          <form id="formRegistro" class="mt-6 grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Nombre y apellido</label>
-              <input required id="nombre" placeholder="Tu nombre" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Teléfono</label>
-              <input required id="telefono" type="tel" placeholder="Ej. +58 412..." class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Email</label>
-              <input required id="email" type="email" placeholder="tucorreo@dominio.com" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Ciudad</label>
-              <input required id="ciudad" placeholder="Tu ciudad" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Marca</label>
-              <select id="marca" class="w-full glassy rounded-xl px-4 py-3 bg-transparent text-white outline-none">
-                <option class="bg-dark">Bera</option>
-                <option class="bg-dark">Empire</option>
-                <option class="bg-dark">Indeciso/a</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Modelo</label>
-              <input id="modelo" placeholder="Ej. Bera BR 150" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Aporte semanal ($)</label>
-              <input id="aporte" type="number" min="5" placeholder="Ej. 35" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div>
-              <label class="block text-sm text-white/80 mb-2">Plazo (meses)</label>
-              <input id="plazo" type="number" min="3" max="24" placeholder="Ej. 12" class="w-full glassy rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none">
-            </div>
-            <div class="sm:col-span-2 flex items-center gap-3 mt-2">
-              <input required id="terminos" type="checkbox" class="w-5 h-5">
-              <label for="terminos" class="text-sm text-white/80">Acepto recibir información y la política de privacidad (Demo).</label>
-            </div>
-            <div class="sm:col-span-2 flex flex-col sm:flex-row gap-3 mt-2">
-              <button class="w-full sm:w-auto bg-accent-600 hover:bg-accent-700 text-dark font-bold px-6 py-3 rounded-xl">Enviar solicitud</button>
-              <button type="button" onclick="limpiarFormulario()" class="w-full sm:w-auto glassy px-6 py-3 rounded-xl">Limpiar</button>
-            </div>
-          </form>
 
-          <div id="ok" class="hidden mt-6 glassy rounded-xl p-5">
-            <h3 class="font-bold text-lg">¡Registro recibido!</h3>
-            <p class="text-white/80 text-sm mt-1">Tu turno estimado: <span id="turno" class="font-semibold text-white"></span>.</p>
-            <div class="mt-3 flex flex-wrap gap-3">
-              <button onclick="verRegistros()" class="glassy px-4 py-2 rounded-xl">Ver mis registros (Demo)</button>
-              <button onclick="descargarResumen()" class="bg-primary-600 hover:bg-primary-700 text-white font-semibold px-4 py-2 rounded-xl">Descargar resumen</button>
+          <!-- Hero -->
+          <div class="mt-8 rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-[var(--surface)] to-[var(--muted)]">
+            <div class="p-8 md:p-12">
+              <div class="flex flex-col md:flex-row items-center md:items-end justify-between gap-8">
+                <div class="max-w-2xl">
+                  <div class="inline-flex items-center gap-2 text-xs text-[var(--sub)] border border-white/10 px-3 py-1.5 rounded-full">💅 NailSpa • /NailSpa</div>
+                  <h1 class="mt-4 text-4xl font-semibold" style="font-family:'Playfair Display', serif">Uñas impecables, estilo que habla por ti</h1>
+                  <p class="mt-3 text-[var(--sub)]">Agenda tu cita, explora la galería y conoce nuestros servicios premium.</p>
+                  <div class="mt-6 flex flex-wrap gap-3">
+                    <a href="#site/NailSpa#reservar" class="inline-flex items-center gap-2 bg-[var(--gold)] text-black font-semibold px-5 py-3 rounded-xl t hover:bg-[var(--gold-2)]">Reservar</a>
+                    <a href="#site/NailSpa#servicios" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-white/10 hover:border-[var(--gold)]/40 t">Ver servicios</a>
+                  </div>
+                </div>
+                <div class="grid grid-cols-3 gap-3 shrink-0">
+                  <div class="rounded-2xl bg-[var(--bg)]/60 border border-white/10 w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-5xl">✨</div>
+                  <div class="rounded-2xl bg-[var(--bg)]/60 border border-white/10 w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-5xl">🎨</div>
+                  <div class="rounded-2xl bg-[var(--bg)]/60 border border-white/10 w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-5xl">🌸</div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Servicios -->
+          <div id="servicios" class="mt-10 grid md:grid-cols-3 gap-6">
+            <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6">
+              <div class="text-3xl">💎</div>
+              <h3 class="mt-3 font-semibold">Manicure Gel</h3>
+              <p class="text-sm text-[var(--sub)] mt-2">Color intenso y brillo duradero.</p>
+              <div class="mt-4 text-sm text-[var(--gold)]">Desde $25</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6">
+              <div class="text-3xl">🌿</div>
+              <h3 class="mt-3 font-semibold">Spa Hidratante</h3>
+              <p class="text-sm text-[var(--sub)] mt-2">Rutina de cuidado completa.</p>
+              <div class="mt-4 text-sm text-[var(--gold)]">Desde $35</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6">
+              <div class="text-3xl">🎀</div>
+              <h3 class="mt-3 font-semibold">Diseños a medida</h3>
+              <p class="text-sm text-[var(--sub)] mt-2">Arte para tus manos.</p>
+              <div class="mt-4 text-sm text-[var(--gold)]">Desde $15</div>
+            </div>
+          </div>
+
+          <!-- Galería + Mapa -->
+          <div class="mt-10 grid md:grid-cols-3 gap-6">
+            <div class="md:col-span-2 rounded-2xl border border-white/10 bg-[var(--surface)] p-6">
+              <h3 class="font-semibold">Galería</h3>
+              <div class="mt-4 grid grid-cols-3 gap-3">
+                <div class="rounded-xl h-24 bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">💅</div>
+                <div class="rounded-xl h-24 bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">🌸</div>
+                <div class="rounded-xl h-24 bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">✨</div>
+                <div class="rounded-xl h-24 bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">🎨</div>
+                <div class="rounded-xl h-24 bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">💖</div>
+                <div class="rounded-xl h-24 bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center">🌿</div>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-[var(--surface)] p-6">
+              <h3 class="font-semibold">Dónde estamos</h3>
+              <div class="mt-4 rounded-xl h-48 bg-[var(--bg)]/60 border border-white/10 flex items-center justify-center text-[var(--sub)]">Mapa (demo)</div>
+              <div class="mt-4 text-sm text-[var(--sub)]">Lunes a Sábado: 10:00 - 19:00</div>
+            </div>
+          </div>
+
+          <!-- Reservar -->
+          <div id="reservar" class="mt-10 rounded-2xl border border-white/10 bg-[var(--surface)] p-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div>
+                <h3 class="font-semibold">Reserva tu cita</h3>
+                <p class="text-sm text-[var(--sub)] mt-1">Agenda rápida (demo). Verás confirmación en pantalla.</p>
+              </div>
+              <div class="flex gap-3">
+                <button data-book="hoy" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 hover:border-[var(--gold)]/40 t">Hoy</button>
+                <button data-book="mañana" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 hover:border-[var(--gold)]/40 t">Mañana</button>
+                <button data-book="esta semana" class="inline-flex items-center gap-2 bg-[var(--gold)] text-black font-semibold px-4 py-2 rounded-xl t hover:bg-[var(--gold-2)]">Esta semana</button>
+              </div>
+            </div>
+            <div id="bookMsg" class="hidden mt-4 rounded-xl border border-[var(--gold)]/30 bg-[var(--gold)]/10 text-[var(--gold-2)] p-4">
+              ¡Listo! Tu solicitud de reserva fue registrada. (Demo)
+            </div>
+          </div>
+
+          <!-- Footer micro -->
+          <div class="py-10 text-center text-xs text-[var(--sub)]">
+            ImpulsoDigitalStudio.shop/NailSpa — Desarrollado por Leonova Studio
           </div>
         </div>
-
-        <aside class="w-full lg:w-1/3 space-y-6">
-          <div class="glassy rounded-2xl p-6">
-            <h3 class="font-bold text-xl">Beneficios clave</h3>
-            <ul class="mt-3 space-y-2 text-white/80 text-sm">
-              <li>• Sin intereses: pagas lo justo por tu moto.</li>
-              <li>• Transparencia en entregas por turno/sorteo.</li>
-              <li>• Acompañamiento durante todo el ciclo.</li>
-              <li>• Bera y Empire: buena disponibilidad y repuestos.</li>
-            </ul>
-          </div>
-          <div class="glassy rounded-2xl p-6">
-            <h3 class="font-bold text-xl">Contacto</h3>
-            <p class="text-white/80 text-sm mt-2">¿Dudas? Escríbenos y te orientamos.</p>
-            <div class="mt-4 grid gap-2 text-sm">
-              <a href="#registro" class="glassy px-4 py-2 rounded-xl text-white/90">Quiero que me llamen</a>
-              <a href="#faq" class="glassy px-4 py-2 rounded-xl text-white/90">Ver preguntas frecuentes</a>
-            </div>
-          </div>
-        </aside>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ -->
-  <section id="faq" class="pb-20">
-    <div class="mx-auto max-w-7xl px-6">
-      <div class="glassy rounded-2xl p-6 md:p-8">
-        <h2 class="text-3xl font-extrabold">Preguntas frecuentes</h2>
-        <div class="mt-6 space-y-4">
-          <details class="glassy rounded-xl p-4">
-            <summary class="cursor-pointer font-semibold">¿Cuánto tardan en entregar?</summary>
-            <p class="text-white/80 mt-2 text-sm">En promedio 2–6 semanas, según tamaño del ciclo y turno.</p>
-          </details>
-          <details class="glassy rounded-xl p-4">
-            <summary class="cursor-pointer font-semibold">¿Qué pasa si falto un aporte?</summary>
-            <p class="text-white/80 mt-2 text-sm">Se reprograma tu turno y puede existir un recargo de respaldo al grupo.</p>
-          </details>
-          <details class="glassy rounded-xl p-4">
-            <summary class="cursor-pointer font-semibold">¿Puedo cambiar de modelo?</summary>
-            <p class="text-white/80 mt-2 text-sm">Sí, antes de tu entrega puedes cambiar a otro modelo disponible.</p>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-white/10">
-    <div class="mx-auto max-w-7xl px-6 py-10 text-sm text-white/70 flex flex-col md:flex-row gap-4 items-center justify-between">
-      <div>© <span id="year"></span> Susu Motos — Proyecto by Lenova Studio</div>
-      <div class="flex items-center gap-4">
-        <a href="#registro" class="hover:text-white">Unirme al próximo ciclo</a>
-        <a href="#calculadora" class="hover:text-white">Calcular elegibilidad</a>
-      </div>
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-sm text-[var(--sub)]">© <span id="year"></span> Leonova Studio. Todos los derechos reservados.</div>
+      <div class="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">Impulso Digital • Desarrollado por Leonova Studio</div>
     </div>
   </footer>
 
   <script>
-    // Año
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Dataset de slides (clave localStorage y título)
-    const slidesData = [
-      { key:'BR150', title:'Bera BR 150' },
-      { key:'DTX200', title:'Bera DTX 200' },
-      { key:'RKS150', title:'Empire RKS 150' },
-      { key:'TX200', title:'Empire TX 200' },
-      { key:'SBR250', title:'Bera SBR 250' },
-      { key:'ADV250', title:'Empire ADV 250' }
-    ];
-
-    // Construir los slides: usa foto guardada o un fondo de marcador
-    const slidesWrap = document.getElementById('slides');
-    const slideTitle = document.getElementById('slideTitle');
-    const dotsWrap = document.getElementById('dots');
-
-    function placeholderSVG(label){
-      // marcador elegante con gradiente y texto del modelo
-      return `data:image/svg+xml;utf8,${encodeURIComponent(`
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'>
-          <defs>
-            <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
-              <stop offset='0%' stop-color='#6366F1'/>
-              <stop offset='100%' stop-color='#06B6D4'/>
-            </linearGradient>
-          </defs>
-          <rect width='1600' height='900' fill='url(#g)'/>
-          <g opacity='0.2'>
-            <circle cx='200' cy='200' r='120' fill='white'/>
-            <circle cx='1400' cy='700' r='160' fill='white'/>
-            <circle cx='900' cy='300' r='100' fill='white'/>
-          </g>
-          <text x='50%' y='50%' text-anchor='middle' fill='white' font-family='Plus Jakarta Sans, sans-serif' font-size='96' font-weight='800'>${label}</text>
-          <text x='50%' y='60%' text-anchor='middle' fill='white' font-family='Plus Jakarta Sans, sans-serif' font-size='32' opacity='0.9'>Sube una foto en “Modelos”</text>
-        </svg>
-      `)}`;
+    // Basic router (hash-based)
+    const routes = Array.from(document.querySelectorAll('[data-route]'));
+    function showRoute(path){
+      routes.forEach(r => r.classList.add('hidden-route'));
+      const target = routes.find(r => r.getAttribute('data-route') === path);
+      if(target){ target.classList.remove('hidden-route'); scrollTo({top:0, behavior:'smooth'}); }
+      // update menu state
+      document.getElementById('mobileMenu')?.classList.add('hidden');
     }
-
-    function buildSlides(){
-      slidesWrap.innerHTML = '';
-      dotsWrap.innerHTML = '';
-      slidesData.forEach((s, idx) => {
-        const saved = localStorage.getItem('photo_' + s.key);
-        const src = saved || placeholderSVG(s.title);
-        // Slide
-        const slide = document.createElement('div');
-        slide.className = 'relative w-full shrink-0 h-[68vh] md:h-[78vh]';
-        slide.innerHTML = `
-          <img src="${src}" alt="${s.title}" class="absolute inset-0 w-full h-full object-cover"/>
-          <div class="absolute inset-0 bg-black/25"></div>
-          <div class="absolute left-6 right-6 top-6 md:left-10 md:top-10">
-            <span class="inline-block bg-white/10 text-white/90 text-xs px-3 py-1 rounded-full">Foto del modelo</span>
-          </div>
-        `;
-        slidesWrap.appendChild(slide);
-        // Dot
-        const dot = document.createElement('button');
-        dot.className = 'w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white/80 transition';
-        dot.setAttribute('aria-label', 'Ir al slide ' + (idx+1));
-        dot.addEventListener('click', () => goTo(idx));
-        dotsWrap.appendChild(dot);
-      });
-      updateDots();
-      slideTitle.textContent = slidesData[current].title;
+    function parseHash(){
+      const h = location.hash || '#/';
+      const clean = h.replace(/^#/, '');
+      showRoute(clean);
     }
+    window.addEventListener('hashchange', parseHash);
+    // Init default route
+    if(!location.hash) location.hash = '#/';
+    parseHash();
 
-    // Carrusel: navegación
-    let current = 0;
-    let autoTimer = null;
-
-    function updateTransform(){
-      const width = slidesWrap.clientWidth;
-      slidesWrap.style.transform = `translateX(-${current * width}px)`;
-      slideTitle.textContent = slidesData[current].title;
-      updateDots();
-    }
-
-    function updateDots(){
-      const dots = Array.from(dotsWrap.children);
-      dots.forEach((d, i) => {
-        d.style.backgroundColor = i === current ? 'white' : 'rgba(255,255,255,0.4)';
-        d.style.width = i === current ? '14px' : '10px';
-        d.style.height = '10px';
-        d.style.borderRadius = '999px';
-      });
-    }
-
-    function next(){ current = (current + 1) % slidesData.length; updateTransform(); }
-    function prev(){ current = (current - 1 + slidesData.length) % slidesData.length; updateTransform(); }
-    function goTo(i){ current = i % slidesData.length; updateTransform(); }
-
-    // Auto-play
-    function startAuto(){ stopAuto(); autoTimer = setInterval(next, 4500); }
-    function stopAuto(){ if(autoTimer) clearInterval(autoTimer); }
-
-    // Redimensionar
-    window.addEventListener('resize', () => updateTransform());
-
-    // Flechas
-    document.getElementById('nextBtn').addEventListener('click', () => { next(); startAuto(); });
-    document.getElementById('prevBtn').addEventListener('click', () => { prev(); startAuto(); });
-
-    // Swipe táctil
-    (function enableSwipe(){
-      let startX = 0, moved = false;
-      slidesWrap.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; moved = false; stopAuto(); }, {passive:true});
-      slidesWrap.addEventListener('touchmove', (e) => { moved = true; }, {passive:true});
-      slidesWrap.addEventListener('touchend', (e) => {
-        const endX = e.changedTouches[0].clientX;
-        const delta = endX - startX;
-        if (moved && Math.abs(delta) > 40) { delta < 0 ? next() : prev(); }
-        startAuto();
-      });
-    })();
-
-    // Teclado
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { next(); startAuto(); }
-      if (e.key === 'ArrowLeft') { prev(); startAuto(); }
+    // Mobile menu toggle
+    document.getElementById('btnMenu')?.addEventListener('click', () => {
+      const m = document.getElementById('mobileMenu');
+      m.classList.toggle('hidden');
     });
 
-    // Inicializar carrusel
-    buildSlides();
-    startAuto();
-
-    // Filtro de tarjetas por marca
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.model-card');
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const brand = btn.getAttribute('data-filter');
-        filterBtns.forEach(b => b.classList.remove('bg-accent-600','text-dark'));
-        btn.classList.add('bg-accent-600','text-dark');
-        cards.forEach(card => {
-          const show = brand === 'all' || card.getAttribute('data-brand') === brand;
-          card.style.display = show ? 'flex' : 'none';
-        });
+    // Search/filter in portfolio
+    const input = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearSearch');
+    const projects = () => Array.from(document.querySelectorAll('.project'));
+    function applyFilter(){
+      const q = (input.value || '').toLowerCase().trim();
+      let any = false;
+      projects().forEach(card => {
+        const name = (card.dataset.name || '').toLowerCase();
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const match = !q || name.includes(q) || tags.includes(q);
+        card.style.display = match ? '' : 'none';
+        if(match) any = true;
       });
-    });
-
-    // Manejo de fotos locales por modelo (usadas también por el carrusel)
-    const photoKeys = ['BR150','DTX200','RKS150','TX200','SBR250','ADV250'];
-
-    function triggerPhoto(key){
-      const input = document.getElementById('file-'+key);
-      if (input) input.click();
-    }
-    function handlePhotoChange(e,key){
-      const file = e.target.files[0];
-      if(!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        localStorage.setItem('photo_'+key, reader.result);
-        const img = document.getElementById('img-'+key);
-        const ph = document.getElementById('ph-'+key);
-        if (img && ph){
-          img.src = reader.result;
-          img.classList.remove('hidden');
-          ph.classList.add('hidden');
+      clearBtn.classList.toggle('hidden', !q);
+      // If none match, maybe show a friendly message
+      let empty = document.getElementById('noResults');
+      if(!any){
+        if(!empty){
+          empty = document.createElement('div');
+          empty.id = 'noResults';
+          empty.className = 'mt-6 text-center text-[var(--sub)]';
+          empty.textContent = 'Sin resultados. Intenta otra palabra clave.';
+          document.getElementById('grid').appendChild(empty);
         }
-        buildSlides(); // refresca el carrusel con la nueva foto
-      };
-      reader.readAsDataURL(file);
-    }
-    function clearPhoto(key){
-      localStorage.removeItem('photo_'+key);
-      const img = document.getElementById('img-'+key);
-      const ph = document.getElementById('ph-'+key);
-      if (img && ph){
-        img.src = '';
-        img.classList.add('hidden');
-        ph.classList.remove('hidden');
-      }
-      buildSlides(); // refresca carrusel
-    }
-
-    // Prefill modelo al registro
-    function prefillModel(marca, modelo, precio) {
-      document.getElementById('marca').value = marca;
-      document.getElementById('modelo').value = modelo;
-      document.getElementById('precio').value = document.getElementById('precio')?.value || precio;
-      document.getElementById('registro').scrollIntoView({behavior:'smooth'});
-      const sugerido = Math.max(10, Math.round((precio * 0.12) / 4));
-      const aporte = document.getElementById('aporte');
-      if (aporte) aporte.value = sugerido;
-    }
-
-    // Calculadora
-    const ingresoEl = document.getElementById('ingreso');
-    const inicialEl = document.getElementById('inicial');
-    const precioEl  = document.getElementById('precio');
-    const semanalEl = document.getElementById('semanal');
-    const mesesEl   = document.getElementById('meses');
-    const calcBtn   = document.getElementById('calcBtn');
-    const resultado = document.getElementById('resultado');
-    const badge = document.getElementById('badge');
-    const mensaje = document.getElementById('mensaje');
-    const detalles = document.getElementById('detalles');
-
-    function evaluar() {
-      const ingreso = Number(ingresoEl.value || 0);
-      const inicial = Number(inicialEl.value || 0);
-      const precio  = Number(precioEl.value || 0);
-      const semanal = Number(semanalEl.value || 0);
-      const meses   = Number(mesesEl.value || 0);
-
-      if (ingreso<=0 || precio<=0 || semanal<=0 || meses<=0) {
-        resultado.classList.remove('hidden');
-        badge.textContent = "Faltan datos";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 bg-yellow-400/20 text-yellow-200";
-        mensaje.textContent = "Completa los campos clave para evaluar.";
-        detalles.textContent = "Ingresa ingreso mensual, precio, aporte semanal y plazo.";
-        return;
-      }
-
-      const ingresoSemanal = ingreso / 4;
-      const maxRecomendado = ingresoSemanal * 0.2;
-      const capitalObjetivo = Math.max(0, precio - inicial);
-      const semanas = meses * 4;
-      const totalAportado = semanal * semanas + inicial;
-
-      const cubreObjetivo = totalAportado >= precio;
-      const aporteSaludable = semanal <= maxRecomendado;
-
-      let score = 0;
-      if (cubreObjetivo) score += 2;
-      if (aporteSaludable) score += 2;
-      if (inicial >= precio * 0.1) score += 1;
-      if (meses >= 8) score += 1;
-
-      resultado.classList.remove('hidden');
-      if (score >= 5) {
-        badge.textContent = "¡Aplicas!";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 bg-green-400/20 text-green-200";
-        mensaje.textContent = "Tus aportes y plazo se ven saludables para entrar al ciclo.";
-      } else if (score >= 3) {
-        badge.textContent = "Casi listo";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 bg-yellow-400/20 text-yellow-200";
-        mensaje.textContent = "Con unos ajustes pequeños podrías aplicar sin problemas.";
       } else {
-        badge.textContent = "Revisa montos";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 bg-red-400/20 text-red-200";
-        mensaje.textContent = "Tus números no alcanzan el objetivo en el plazo elegido.";
+        empty?.remove();
       }
-
-      const sugeridoSemanal = Math.ceil((capitalObjetivo / semanas) * 1.0);
-      const sano = Math.floor(maxRecomendado);
-
-      detalles.innerHTML = `
-        • Objetivo a financiar: $${capitalObjetivo.toLocaleString()}<br/>
-        • Total aportado en ${meses} meses: $${totalAportado.toLocaleString()}<br/>
-        • Aporte semanal recomendado: $${sugeridoSemanal.toLocaleString()}<br/>
-        • Límite saludable según tu ingreso: hasta $${sano.toLocaleString()} / semana
-      `;
     }
-    calcBtn.addEventListener('click', evaluar);
+    input?.addEventListener('input', applyFilter);
+    clearBtn?.addEventListener('click', () => { input.value=''; applyFilter(); input.focus(); });
 
-    function sugerirSemanal() {
-      const ingreso = Number(ingresoEl.value || 0);
-      const inicial = Number(inicialEl.value || 0);
-      const precio  = Number(precioEl.value || 0);
-      const meses   = Number(mesesEl.value || 12);
-      if (!precio || !meses) return;
-      const semanas = meses * 4;
-      const objetivo = Math.max(0, precio - inicial);
-      const minimo = Math.ceil(objetivo / semanas);
-      const maxSalud = Math.floor((ingreso/4) * 0.2);
-      const sugerido = Math.min(Math.max(minimo, 10), Math.max(maxSalud, minimo));
-      semanalEl.value = sugerido;
-      evaluar();
-    }
-
-    // Registro DEMO (localStorage)
-    const form = document.getElementById('formRegistro');
-    const ok = document.getElementById('ok');
-    const turnoEl = document.getElementById('turno');
-
-    function limpiarFormulario() {
-      form.reset();
-    }
-
-    function verRegistros() {
-      const registros = JSON.parse(localStorage.getItem('susu_registros') || '[]');
-      if (!registros.length) {
-        alert('Aún no tienes registros guardados (Demo).');
-        return;
-      }
-      const texto = registros.map(r =>
-        `#${r.turno} • ${r.nombre} • ${r.marca} ${r.modelo} • Sem: $${r.aporte} • ${r.plazo} meses`
-      ).join('\n');
-      alert('Mis registros (local):\n\n' + texto);
-    }
-
-    function descargarResumen() {
-      const registros = JSON.parse(localStorage.getItem('susu_registros') || '[]');
-      if (!registros.length) { alert('No hay registros para descargar.'); return; }
-      const lineas = ['Susu Motos — Registros Demo', ''];
-      registros.forEach(r => {
-        lineas.push(`#${r.turno} | ${r.nombre} | ${r.telefono} | ${r.email} | ${r.ciudad} | ${r.marca} ${r.modelo} | Sem: $${r.aporte} | Plazo: ${r.plazo}m`);
+    // Preview modal content (simple demo)
+    const modal = document.getElementById('previewModal');
+    const previewContent = document.getElementById('previewContent');
+    const previewGo = document.getElementById('previewGo');
+    document.querySelectorAll('[data-preview]').forEach(btn=>{
+      btn.addEventListener('click', () => {
+        const kind = btn.getAttribute('data-preview');
+        modal.classList.remove('hidden');
+        document.body.style.overflow='hidden';
+        let html = '';
+        if(kind==='bistro'){
+          html = 'Bistro Luna: carta del día, reservas simples y ubicación clara.';
+          previewGo.href = '#site/BistroLuna';
+        }else if(kind==='fit'){
+          html = 'FitPulse: planes de entrenamiento, horarios y registro rápido.';
+          previewGo.href = '#site/FitPulse';
+        }else{
+          html = 'Catálogo de moda con colecciones destacadas y escaparate visual.';
+          previewGo.href = '#site/BoutiqueNova';
+        }
+        previewContent.textContent = html + ' (demo)';
       });
-      const blob = new Blob([lineas.join('\n')], {type:'text/plain'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'susu-motos-registros-demo.txt';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = {
-        nombre: document.getElementById('nombre').value.trim(),
-        telefono: document.getElementById('telefono').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        ciudad: document.getElementById('ciudad').value.trim(),
-        marca: document.getElementById('marca').value,
-        modelo: document.getElementById('modelo').value.trim(),
-        aporte: Number(document.getElementById('aporte').value || 0),
-        plazo: Number(document.getElementById('plazo').value || 0),
-        fecha: new Date().toISOString()
-      };
-      const registros = JSON.parse(localStorage.getItem('susu_registros') || '[]');
-      const turno = (registros[registros.length-1]?.turno || 1000) + 1;
-      data.turno = turno;
-      registros.push(data);
-      localStorage.setItem('susu_registros', JSON.stringify(registros));
-      ok.classList.remove('hidden');
-      turnoEl.textContent = '#' + turno;
-      ok.scrollIntoView({behavior:'smooth', block:'center'});
-      const keepMarca = document.getElementById('marca').value;
-      const keepModelo = document.getElementById('modelo').value;
-      form.reset();
-      document.getElementById('marca').value = keepMarca;
-      document.getElementById('modelo').value = keepModelo;
     });
+    document.getElementById('closePreview')?.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      document.body.style.overflow='';
+    });
+    modal?.addEventListener('click', (e) => {
+      if(e.target === modal.firstElementChild) {
+        modal.classList.add('hidden');
+        document.body.style.overflow='';
+      }
+    });
+
+    // Contact demo submit
+    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('contactSuccess')?.classList.remove('hidden');
+      // reset for demo
+      e.target.reset();
+    });
+
+    // Booking demo on microsite
+    document.querySelectorAll('[data-book]').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        document.getElementById('bookMsg')?.classList.remove('hidden');
+      });
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9712bbf237a8748d',t:'MTc1NTUzMzk4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97159f78801dd9f5',t:'MTc1NTU2NDI3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
